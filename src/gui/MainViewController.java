@@ -34,7 +34,7 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemDepartmentAction() {
-		System.out.println("onMenuItemDepartmentAction");
+		LoadView("/gui/DepartmentList.fxml");
 	}
 	
 	@FXML
@@ -58,14 +58,10 @@ public class MainViewController implements Initializable {
 			// Acessar o VBox que está dentro do Content que está dentro do ScrollPane
 			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 		
-			// Pegar o primeiro(0) filho(children) do VBox(MainMenu)
 			Node mainMenu = mainVBox.getChildren().get(0);
-			// Limpar todos os filhos do MainVBox
 			mainVBox.getChildren().clear();
 			
-			// Adicionar mainMenu
 			mainVBox.getChildren().add(mainMenu);
-			// Adicionar coleção(AddAll) - Os filhos do newVBox
 			mainVBox.getChildren().addAll(newVBox.getChildren());
 		}
 		catch (IOException e) {
