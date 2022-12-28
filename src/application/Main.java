@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,10 +15,14 @@ public class Main extends Application {
 		try {
 			// Carregar o diretório do MainView
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
-			// Parent é uma superclasse de AnchorPane
-			Parent parent = loader.load();
-			// Instacia o Parent/AnchorPane
-			Scene mainScene = new Scene(parent);
+			ScrollPane scrollPane = loader.load();
+			
+			// Arrumar o problema ao cortar pela metade alguma classe
+			scrollPane.setFitToHeight(true);
+			scrollPane.setFitToWidth(true);
+			
+			// Instacia o ScrollPane ao AnchorPane
+			Scene mainScene = new Scene(scrollPane);
 			// Mostrar a cena/tela e o título
 			primaryStage.setScene(mainScene);
 			primaryStage.setTitle("Sample JavaFX application");
