@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	// Feito isso para o Scene ser acessado fora do Main.java
+	private static Scene mainScene;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -21,16 +24,20 @@ public class Main extends Application {
 			scrollPane.setFitToHeight(true);
 			scrollPane.setFitToWidth(true);
 			
-			// Instacia o ScrollPane ao AnchorPane
-			Scene mainScene = new Scene(scrollPane);
+			// Feito isso para o Scene ser acessado fora do Main.java
+			mainScene = new Scene(scrollPane);
 			// Mostrar a cena/tela e o título
 			primaryStage.setScene(mainScene);
 			primaryStage.setTitle("Sample JavaFX application");
-			// Mostrar tudo
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// Feito isso para o Scene ser acessado fora do Main.java
+	public static Scene getMainScene() {
+		return mainScene;
 	}
 
 	public static void main(String[] args) {

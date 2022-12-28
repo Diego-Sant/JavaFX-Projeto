@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="212.0" prefWidth="316.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+   <children>
+      <Label text="About">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="20.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label prefHeight="166.0" prefWidth="316.0" text="Lorem Ipsum is simply dummy text of the printing &#10;and typesetting industry. Lorem Ipsum has been &#10;the industry's standard dummy text ever since the &#10;1500s, when an unknown printer took a galley of type &#10;and scrambled it to make a type specimen book.&#10;It has survived not only five centuries, but also the &#10;leap into electronic typesetting, remaining essentially &#10;unchanged.">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+   </children>
+</VBox>
