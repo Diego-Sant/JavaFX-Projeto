@@ -29,6 +29,7 @@ public class SellerDaoJDBC implements SellerDao {
 	public void insert(Seller obj) {
 		PreparedStatement st = null;
 		try {
+			// Inserir um usuário
 			st = conn.prepareStatement(
 					"INSERT INTO seller "
 					+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
@@ -68,6 +69,7 @@ public class SellerDaoJDBC implements SellerDao {
 	public void update(Seller obj) {
 		PreparedStatement st = null;
 		try {
+			// Atualizar informações de um usuário
 			st = conn.prepareStatement(
 					"UPDATE seller "
 					+ "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
@@ -94,6 +96,7 @@ public class SellerDaoJDBC implements SellerDao {
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
+			// Deletar um usuário
 			st = conn.prepareStatement("DELETE FROM seller WHERE Id = ?");
 			
 			st.setInt(1, id);
@@ -113,6 +116,7 @@ public class SellerDaoJDBC implements SellerDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			// Encontrar o usuário por Id
 			st = conn.prepareStatement(
 					"SELECT seller.*,department.Name as DepName "
 					+ "FROM seller INNER JOIN department "
@@ -160,6 +164,7 @@ public class SellerDaoJDBC implements SellerDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			// Achar todos os usuários
 			st = conn.prepareStatement(
 					"SELECT seller.*,department.Name as DepName "
 					+ "FROM seller INNER JOIN department "
@@ -199,6 +204,7 @@ public class SellerDaoJDBC implements SellerDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			// Achar usuário por departamento
 			st = conn.prepareStatement(
 					"SELECT seller.*,department.Name as DepName "
 					+ "FROM seller INNER JOIN department "

@@ -27,6 +27,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			// Achar departamento por Id
 			st = conn.prepareStatement(
 				"SELECT * FROM department WHERE Id = ?");
 			st.setInt(1, id);
@@ -53,6 +54,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+			// Achar todos os departamentos
 			st = conn.prepareStatement(
 				"SELECT * FROM department ORDER BY Name");
 			rs = st.executeQuery();
@@ -80,6 +82,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 	public void insert(Department obj) {
 		PreparedStatement st = null;
 		try {
+			// Adicionar um departamento
 			st = conn.prepareStatement(
 				"INSERT INTO department " +
 				"(Name) " +
@@ -114,6 +117,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 	public void update(Department obj) {
 		PreparedStatement st = null;
 		try {
+			// Atualizar um departamento
 			st = conn.prepareStatement(
 				"UPDATE department " +
 				"SET Name = ? " +
@@ -136,6 +140,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
+			// Deletar um departamento por id
 			st = conn.prepareStatement(
 				"DELETE FROM department WHERE Id = ?");
 
