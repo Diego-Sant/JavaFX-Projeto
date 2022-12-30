@@ -29,4 +29,13 @@ public class Constraints {
                 }
 		    });
 	}
+	
+	// Não permitir números
+	public static void setTextNotNumbersAllowed(TextField txt) {
+		txt.textProperty().addListener((obs, oldValue, newValue) -> {
+	        if (newValue != null && !newValue.matches("^\\D*$")) {
+	        	txt.setText(oldValue);
+	        }
+	    });
+	}
 }
