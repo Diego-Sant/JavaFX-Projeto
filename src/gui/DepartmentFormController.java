@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Department;
+import model.exceptions.ValidationException;
 import model.services.DepartmentService;
 
 public class DepartmentFormController implements Initializable {
@@ -75,6 +78,9 @@ public class DepartmentFormController implements Initializable {
 		catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
+		catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
+		}
 	}
 	
 	// Metódo para atualizar a tela em tempo real ao em vez de precisar atualizar manualmente
@@ -87,11 +93,22 @@ public class DepartmentFormController implements Initializable {
 	private Department getFormData() {
 		Department obj = new Department();
 		
+		ValidationException exception = new ValidationException("Validation error");
+		
 		// tryParseToInt usado pois o getText era String e o setId era Integer, então precisou ser convertido para Integer
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		
+		// Configuração para dar excessão caso o campo name esteja vazio
+		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+			exception.addError("name", "Field can't be empty");
+		}
 		// Tanto o setName quanto o getText eram Strings então não foi preciso o tryParseToInt
 		obj.setName(txtName.getText());
 		
+		// Só irá retornar obj caso tiver 0 errors
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 		return obj;
 	}
 
@@ -119,6 +136,15 @@ public class DepartmentFormController implements Initializable {
 		// String.valueOf por que o Id não era String
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getName());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		// Pegando error correspondente ao campo "name" e usando em labelErrorName
+		if (fields.contains("name")) {
+			labelErrorName.setText(errors.get("name"));
+		}
 	}
 
 }
