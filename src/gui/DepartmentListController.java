@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentService;
 
-public class DepartmentListController implements Initializable {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 	private DepartmentService service;
 	
@@ -92,6 +93,8 @@ public class DepartmentListController implements Initializable {
 			DepartmentFormController controller = loader.getController();
 			controller.setDepartment(obj);
 			controller.setDepartmentService(new DepartmentService());
+			// Quando esse evento for disparado irá executar o onDataChanged 
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			// Configurações para adicionar um pop-up por cima do programa principal
@@ -108,6 +111,12 @@ public class DepartmentListController implements Initializable {
 		catch (IOException e) {
 			Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+
+	// Metódo para atualizar a tela em tempo real ao em vez de precisar atualizar manualmente
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 
 }
