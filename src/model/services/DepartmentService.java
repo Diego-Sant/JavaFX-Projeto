@@ -15,4 +15,14 @@ public class DepartmentService {
 		return dao.findAll();
 	}
 	
+	// Diferenciar se irá adicionar um usuário novo ou atualizar informações
+	public void saveOrUpdate(Department obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj);
+		}
+		else {
+			dao.update(obj);
+		}
+	}
+	
 }
