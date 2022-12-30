@@ -85,8 +85,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
 	}
 
-	// Será responsável por acessar o serviço, carregar os departamentos e jogar no
-	// ObservableList
+	// Será responsável por acessar o serviço, carregar os departamentos e jogar no ObservableList
 	public void updateTableView() {
 		if (service == null) {
 			throw new IllegalStateException("Service was null");
