@@ -22,6 +22,7 @@ public class Constraints {
 	    });
 	}
 
+	// Usado para transformar em double
 	public static void setTextFieldDouble(TextField txt) {
 		txt.textProperty().addListener((obs, oldValue, newValue) -> {
 		    	if (newValue != null && !newValue.matches("\\d*([\\.]\\d*)?")) {
