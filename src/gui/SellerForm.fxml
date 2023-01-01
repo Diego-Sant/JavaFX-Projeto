@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="320.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SellerFormController">
+<AnchorPane prefHeight="320.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SellerFormController">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="274.0" prefWidth="385.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
@@ -49,6 +49,10 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></TextField>
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dpBirthDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtBaseSalary" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorName" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <opaqueInsets>
                   <Insets />
@@ -99,10 +103,6 @@
                </padding>
             </Label>
             <Label text="Department" GridPane.rowIndex="5" />
-            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtBaseSalary" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="dpBirthDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

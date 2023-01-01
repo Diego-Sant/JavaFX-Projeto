@@ -29,6 +29,15 @@ public class Utils {
 			return null;
 		}
 	}
+	
+	// Passar atributo para Double
+	public static Double tryParseToDouble(String str) {
+		try {
+			return Double.parseDouble(str);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
 
 	// Configuração para formatação do Date
 	public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {

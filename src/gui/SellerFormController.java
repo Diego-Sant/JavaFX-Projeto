@@ -1,9 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -128,20 +130,47 @@ public class SellerFormController implements Initializable {
 		}
 	}
 
+	// getFormData serve para atualizar ou adicionar as informações depois de clicar em Save
 	private Seller getFormData() {
 		Seller obj = new Seller();
 		
 		ValidationException exception = new ValidationException("Validation error");
 		
-		// tryParseToInt usado pois o getText era String e o setId era Integer, então precisou ser convertido para Integer
+		// tryParseToInt para passar valor de String para Integer
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		
 		
 		// Configuração para dar excessão caso o campo name esteja vazio
 		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
 			exception.addError("name", "Field can't be empty");
 		}
-		// Tanto o setName quanto o getText eram Strings então não foi preciso o tryParseToInt
+		// Tanto o setName quanto o getText eram Strings então não foi necessário mudanças
 		obj.setName(txtName.getText());
+		
+		// Configuração para dar excessão caso o campo email esteja vazio
+		if (txtEmail.getText() == null || txtEmail.getText().trim().equals("")) {
+			exception.addError("email", "Field can't be empty");
+		}
+		// Tanto o setEmail quanto o getText eram Strings então não foi necessário mudanças
+		obj.setEmail(txtEmail.getText());
+		
+		// Configuração usada pois o DatePicker é Instant e foi utilizado como Date
+		if (dpBirthDate.getValue() == null) {
+			exception.addError("birthDate", "Field can't be empty");
+		}
+		else {
+			Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+			obj.setBirthDate(Date.from(instant));
+		}
+			
+		// Configuração para dar excessão caso o campo email esteja vazio
+		if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().equals("")) {
+			exception.addError("baseSalary", "Field can't be empty");
+		}
+		// tryParseToDouble para passar valor de String para Double
+		obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
+		
+		obj.setDepartment(comboBoxDepartment.getValue());
 		
 		// Só irá retornar obj caso tiver 0 errors
 		if (exception.getErrors().size() > 0) {
@@ -210,7 +239,7 @@ public class SellerFormController implements Initializable {
 		comboBoxDepartment.setItems(obsList);
 	}
 	
-	// Juntar o departamento escolhido com as informações do usuário
+	
 	private void initializeComboBoxDepartment() {
 		Callback<ListView<Department>, ListCell<Department>> factory = lv -> new ListCell<Department>() {
 			@Override
@@ -227,10 +256,19 @@ public class SellerFormController implements Initializable {
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
 		
-		// Pegando error correspondente ao campo "name" e usando em labelErrorName
-		if (fields.contains("name")) {
-			labelErrorName.setText(errors.get("name"));
-		}
+		// Pegando error correspondente ao campo "name" e usando o labelErrorName
+		// Apagando o erro caso o campo for preenchido
+		labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
+		
+		// Pegando error correspondente ao campo "email" e usando o labelErrorEmail
+		labelErrorEmail.setText((fields.contains("email") ? errors.get("email") : ""));
+		
+		// Pegando error correspondente ao campo "birthDate" e usando o labelErrorBirthDate
+		labelErrorBirthDate.setText((fields.contains("birthDate") ? errors.get("birthDate") : ""));
+		
+		// Pegando error correspondente ao campo "baseSalary" e usando o labelErrorBaseSalary
+		labelErrorBaseSalary.setText((fields.contains("baseSalary") ? errors.get("baseSalary") : ""));
+		
 	}
 
 }

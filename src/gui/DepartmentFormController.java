@@ -128,6 +128,7 @@ public class DepartmentFormController implements Initializable {
 		Constraints.setTextNotNumbersAllowed(txtName);
 	}
 	
+	// getFormData serve para atualizar ou adicionar as informações depois de clicar em Save
 	public void updateFormData() {
 		if (entity == null) {
 			throw new IllegalStateException("Entity was null");
@@ -144,6 +145,9 @@ public class DepartmentFormController implements Initializable {
 		// Pegando error correspondente ao campo "name" e usando em labelErrorName
 		if (fields.contains("name")) {
 			labelErrorName.setText(errors.get("name"));
+		}
+		else {
+			labelErrorName.setText("");
 		}
 	}
 
